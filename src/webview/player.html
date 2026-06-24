@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src {{cspSource}} 'unsafe-inline'; script-src {{cspSource}} 'unsafe-inline'; font-src {{cspSource}};">
+  <title>RSVP Player</title>
+  <link rel="stylesheet" href="{{webviewUri}}/player.css">
+</head>
+<body>
+  <div class="player-container">
+    <!-- Top Progress Bar -->
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Stats & Info Header -->
+    <div class="player-header">
+      <div class="progress-percentage" id="progressPercentage">0%</div>
+      <div class="time-remaining" id="timeRemaining">--:-- remaining</div>
+    </div>
+
+    <!-- Main Word Viewer Area -->
+    <div class="viewer-box">
+      <!-- Centered Vertical Guides -->
+      <div class="orp-guide-top"></div>
+      <div class="orp-guide-bottom"></div>
+
+      <!-- The Word Display -->
+      <div class="word-viewer" id="wordViewer">
+        <span class="word-part prefix" id="wordPrefix"></span>
+        <span class="word-part orp" id="wordOrp"></span>
+        <span class="word-part suffix" id="wordSuffix"></span>
+      </div>
+    </div>
+
+    <!-- Controls Panel -->
+    <div class="player-controls">
+      <button class="btn icon-btn" id="btnPrev" title="Skip Backward (Left Arrow)" aria-label="Previous Word">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+      </button>
+
+      <button class="btn play-btn" id="btnPlayPause" title="Play/Pause (Space)" aria-label="Play">
+        <!-- Play Icon -->
+        <svg class="icon-play" id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <!-- Pause Icon -->
+        <svg class="icon-pause hidden" id="iconPause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+
+      <button class="btn icon-btn" id="btnStop" title="Stop & Reset (Esc)" aria-label="Stop">
+        <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+      </button>
+
+      <button class="btn icon-btn" id="btnNext" title="Skip Forward (Right Arrow)" aria-label="Next Word">
+        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zm9-12v12h2V6z"/></svg>
+      </button>
+
+      <div class="divider"></div>
+
+      <!-- WPM Control -->
+      <div class="wpm-control">
+        <span class="wpm-label">Speed:</span>
+        <input type="range" class="wpm-slider" id="wpmSlider" min="100" max="1000" step="25" value="300">
+        <span class="wpm-value" id="wpmValue">300 WPM</span>
+      </div>
+
+      <button class="btn icon-btn settings-btn" id="btnSettings" title="Settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+      </button>
+    </div>
+
+    <!-- Settings Drawer -->
+    <div class="settings-drawer" id="settingsDrawer">
+      <div class="drawer-header">
+        <h3>RSVP Preferences</h3>
+        <button class="close-btn" id="btnSettingsClose" aria-label="Close settings">&times;</button>
+      </div>
+      <div class="drawer-content">
+        <div class="setting-group">
+          <label for="selectFont">Font Family</label>
+          <select id="selectFont">
+            <option value="Outfit, Inter, sans-serif">Outfit (Modern)</option>
+            <option value="Inter, sans-serif">Inter (Clean)</option>
+            <option value="Roboto, sans-serif">Roboto</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="Courier New, monospace">Monospace</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label for="inputFontSize">Font Size (px)</label>
+          <input type="number" id="inputFontSize" min="16" max="64" value="28">
+        </div>
+
+        <div class="setting-group">
+          <label>ORP Color</label>
+          <div class="color-picker-grid">
+            <button class="color-swatch active" style="background-color: var(--vscode-editorError-foreground, #ff453a);" data-color="var(--vscode-editorError-foreground, #ff453a)"></button>
+            <button class="color-swatch" style="background-color: #ff9f0a;" data-color="#ff9f0a"></button>
+            <button class="color-swatch" style="background-color: #30d158;" data-color="#30d158"></button>
+            <button class="color-swatch" style="background-color: #0a84ff;" data-color="#0a84ff"></button>
+            <button class="color-swatch" style="background-color: #bf5af2;" data-color="#bf5af2"></button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label>Keyboard Shortcuts</label>
+          <ul class="shortcuts-list">
+            <li><span>Space</span> <span>Play / Pause</span></li>
+            <li><span>Left Arrow</span> <span>Previous Word</span></li>
+            <li><span>Right Arrow</span> <span>Next Word</span></li>
+            <li><span>Up Arrow</span> <span>Previous Sentence</span></li>
+            <li><span>Down Arrow</span> <span>Next Sentence</span></li>
+            <li><span>Esc</span> <span>Stop & Close Drawer</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{{webviewUri}}/player.js"></script>
+</body>
+</html>

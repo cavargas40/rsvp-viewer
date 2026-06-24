@@ -1,0 +1,13 @@
+.vscode/**
+.vscode-test/**
+out/test/**
+src/**
+openspec/**
+.agent/**
+tsconfig.json
+esbuild.js
+.gitignore
+README.md
+**/tsconfig.json
+**/*.map
+**/*.ts

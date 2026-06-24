@@ -1,0 +1,105 @@
+{
+  "name": "rsvp-viewer",
+  "displayName": "RSVP Markdown Reader",
+  "description": "Read Markdown and source code comments using Rapid Serial Visual Presentation (RSVP) with an ORP centered display.",
+  "version": "0.1.0",
+  "publisher": "personal",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "rsvp-viewer.readActiveFile",
+        "title": "rsvp-viewer: Read Active File"
+      },
+      {
+        "command": "rsvp-viewer.readSelection",
+        "title": "rsvp-viewer: Read Selection"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "rsvp-viewer.readSelection",
+          "when": "editorHasSelection",
+          "group": "rsvp@1"
+        },
+        {
+          "command": "rsvp-viewer.readActiveFile",
+          "group": "rsvp@2"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "rsvp-viewer-sidebar",
+          "title": "RSVP Reader",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "rsvp-viewer-sidebar": [
+        {
+          "type": "webview",
+          "id": "rsvp-viewer.playerView",
+          "name": "RSVP Player"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "RSVP Reader",
+      "properties": {
+        "rsvpReader.defaultWpm": {
+          "type": "integer",
+          "default": 300,
+          "description": "Default reading speed in Words Per Minute (WPM)."
+        },
+        "rsvpReader.orpColor": {
+          "type": "string",
+          "default": "var(--vscode-editorError-foreground, #ff0000)",
+          "description": "Accent color for the Optimal Recognition Point (ORP) character highlight."
+        },
+        "rsvpReader.fontSize": {
+          "type": "integer",
+          "default": 28,
+          "description": "Font size for the RSVP reader text in pixels."
+        },
+        "rsvpReader.preferredFont": {
+          "type": "string",
+          "default": "Outfit, Inter, sans-serif",
+          "description": "Preferred font family for the RSVP reader."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "mocha -r ts-node/register src/test/unit/**/*.test.ts",
+    "test:integration": "node out/src/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.17.1",
+    "@types/vscode": "^1.80.0",
+    "@vscode/test-electron": "^2.3.3",
+    "chai": "^4.3.7",
+    "esbuild": "^0.18.11",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}

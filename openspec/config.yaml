@@ -1,0 +1,42 @@
+schema: spec-driven
+
+# Project context
+# Defines the tech stack, directory conventions, and coding patterns.
+context: |
+  Project: RSVP Viewer (rsvp-viewer)
+  Description: A VS Code extension enabling developers to read Markdown, plaintext, and source code comments using Rapid Serial Visual Presentation (RSVP) with an Optimal Recognition Point (ORP) centered display.
+
+  Technology Stack:
+  - Runtime & Tooling: Node.js, npm, TypeScript (strict mode)
+  - Bundling: esbuild (to package extension host scripts and Webview bundles efficiently)
+  - UI Implementation: VS Code Webview Panel API
+  - Webview Stack: Vanilla HTML5, Vanilla CSS, and client-side JavaScript
+  - Styling System: Vanilla CSS leveraging VS Code theme variables (e.g., `--vscode-editor-background`, `--vscode-editor-foreground`, `--vscode-button-background`) for native look-and-feel and light/dark theme sync.
+  - Packaging: `@vscode/vsce` for building and packaging `.vsix` extensions.
+  - Testing: `@vscode/test-electron` for extension environment testing; Mocha/Chai for core document processor unit tests.
+
+  Design & Architecture Conventions:
+  - Separation of Concerns: Host code (`src/extension.ts`, `src/rsvpPanel.ts`, `src/documentProcessor.ts`) must remain separate from webview interface files (stored in a `media/` directory).
+  - Communication Protocol: Communication between the extension host and webview must use VS Code's `postMessage` API with strict type definitions for action payloads.
+  - High-Performance UI: The webview rendering loop (dynamic setTimeout timer) must avoid full DOM updates. Reuse dedicated spans (`.prefix`, `.orp`, `.suffix`) to minimize layout thrashing.
+  - Robust Pacing: Punctuation, header transitions, and paragraphs must trigger specific delay modifiers calculated in `documentProcessor.ts` and respected by the player loop.
+
+  Testing & Verification Standards:
+  - Unit Testing: All utility functions, document processors, ORP calculators, and pacing modifiers must be covered by unit tests (run via `npm run test:unit`).
+  - Integration Testing: The VS Code extension initialization, command executions (`rsvp-viewer.readSelection`, etc.), and Webview message passing must be verified using VS Code's extension test host (run via `npm run test:integration`).
+  - Regression Prevention: Before proposing or finalizing any change, the full test suite (`npm test`) must run and pass successfully.
+
+# Per-artifact rules
+rules:
+  proposal:
+    - Keep proposals concise and focused on high-level goals and non-goals.
+  specs:
+    - Organize requirements by component (e.g., vscode-extension, rsvp-player, document-processor).
+    - Use clear Gherkin-like scenarios (WHEN/THEN) to describe behavior.
+  tasks:
+    - Break tasks down into clear phase-based steps (e.g., Setup, Processor, Engine, Webview, Manager, Polish).
+    - Always include tasks for writing and verifying both unit and integration tests.
+  walkthrough:
+    - Detail the exact verification steps performed (unit test runs, integration test runs, manual testing).
+    - Include command execution outputs or logs showing that the tests passed successfully.
+
