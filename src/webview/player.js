@@ -34,6 +34,11 @@
   const inputFontSize = document.getElementById('inputFontSize');
   const colorSwatches = document.querySelectorAll('.color-swatch');
 
+  const introContainer = document.getElementById('introContainer');
+  const viewerBox = document.querySelector('.viewer-box');
+  const playerHeader = document.querySelector('.player-header');
+  const playerControls = document.querySelector('.player-controls');
+
   // Load state from history
   const previousState = vscode.getState();
   if (previousState && previousState.wpm) {
@@ -41,6 +46,17 @@
     wpmSlider.value = wpm;
     wpmValueEl.textContent = `${wpm} WPM`;
     hasUserAdjustedWpm = true;
+  }
+
+  // Set default view state to show welcome screen when empty
+  togglePlayerMode(false);
+
+  // Detect client OS and update Command Palette keyboard shortcut label
+  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.userAgent.toUpperCase().indexOf('MAC') >= 0;
+  const shortcutText = isMac ? 'Cmd + Shift + P' : 'Ctrl + Shift + P';
+  const cmdShortcutEl = document.getElementById('cmdShortcut');
+  if (cmdShortcutEl) {
+    cmdShortcutEl.textContent = shortcutText;
   }
 
   // --- Playback Loop ---
@@ -126,6 +142,20 @@
       wordPrefixEl.textContent = word.prefix;
       wordOrpEl.textContent = word.orp;
       wordSuffixEl.textContent = word.suffix;
+    }
+  }
+
+  function togglePlayerMode(hasContent) {
+    if (hasContent) {
+      if (introContainer) introContainer.classList.add('hidden');
+      if (viewerBox) viewerBox.classList.remove('hidden');
+      if (playerHeader) playerHeader.classList.remove('hidden');
+      if (playerControls) playerControls.classList.remove('hidden');
+    } else {
+      if (introContainer) introContainer.classList.remove('hidden');
+      if (viewerBox) viewerBox.classList.add('hidden');
+      if (playerHeader) playerHeader.classList.add('hidden');
+      if (playerControls) playerControls.classList.add('hidden');
     }
   }
 
@@ -370,6 +400,7 @@
         currentIndex = 0;
         isPlaying = false;
         togglePlayIcon(false);
+        togglePlayerMode(words.length > 0);
         updateDisplay();
         break;
       case 'settings':

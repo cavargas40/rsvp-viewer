@@ -39,4 +39,3 @@ rules:
   walkthrough:
     - Detail the exact verification steps performed (unit test runs, integration test runs, manual testing).
     - Include command execution outputs or logs showing that the tests passed successfully.
-

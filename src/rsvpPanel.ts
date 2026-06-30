@@ -25,7 +25,7 @@ export class RsvpPanel {
     // Otherwise, create a new panel
     const panel = vscode.window.createWebviewPanel(
       RsvpPanel.viewType,
-      "RSVP Reader",
+      "RSVP Viewer",
       column || vscode.ViewColumn.One,
       {
         enableScripts: true,

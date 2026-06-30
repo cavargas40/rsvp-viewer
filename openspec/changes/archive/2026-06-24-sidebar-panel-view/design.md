@@ -5,7 +5,7 @@ Currently, the RSVP viewer only supports opening as an editor tab (`vscode.Webvi
 ## Goals / Non-Goals
 
 **Goals:**
-- Provide a Sidebar activity bar view container and a Sidebar View for the RSVP reader.
+- Provide a Sidebar activity bar view container and a Sidebar View for the RSVP Viewer.
 - Allow users to drag/position the RSVP player anywhere (e.g., sidebars, panel, editor area) using native VS Code functionality.
 - Reuse the existing HTML, CSS, and JS player bundle to minimize logic duplication.
 - Route reading command outputs automatically: target the sidebar view if it's open/visible; otherwise, fallback to the editor tab panel.

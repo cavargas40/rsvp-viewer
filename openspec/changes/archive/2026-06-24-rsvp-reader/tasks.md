@@ -32,6 +32,6 @@
 
 ## 6. Verification and Polish
 
-- [x] 6.1 Verify RSVP reader launching against various sample Markdown and code files in a VS Code extension host window.
+- [x] 6.1 Verify RSVP Viewer launching against various sample Markdown and code files in a VS Code extension host window.
 - [x] 6.2 Test word skipping, comment stripping, and punctuation delay behaviors manually.
 - [x] 6.3 Build package using vsce locally to ensure no bundle issues or compilation errors exist.

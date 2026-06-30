@@ -4,7 +4,7 @@ With the rise of AI models and tools, almost all human-friendly output, generate
 
 ## What Changes
 
-- Add a Command Palette command (`Ctrl + Shift + P` -> `rsvp-vscode: Read Selection` or `rsvp-vscode: Read Active File`) to launch the RSVP reader.
+- Add a Command Palette command (`Ctrl + Shift + P` -> `rsvp-vscode: Read Selection` or `rsvp-vscode: Read Active File`) to launch the RSVP Viewer.
 - Support reading Markdown documents as well as other common text formats (plain text, code comments, JSON/YAML text blocks, etc.).
 - Add a beautiful, responsive Webview-based player with play, pause, speed (WPM) controls, progression metrics, and forward/backward skipping.
 - Add a settings interface to configure RSVP speed, styling (e.g., ORP highlight color), and reading behavior.

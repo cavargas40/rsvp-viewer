@@ -43,8 +43,8 @@ You can customize the extension using VS Code's settings under the `rsvpReader` 
 
 - `rsvpReader.defaultWpm` (Default: `300`): Default reading speed in Words Per Minute (WPM).
 - `rsvpReader.orpColor` (Default: `var(--vscode-editorError-foreground, #ff0000)`): Accent color for the Optimal Recognition Point character highlight.
-- `rsvpReader.fontSize` (Default: `28`): Default font size for the RSVP reader text in pixels.
-- `rsvpReader.preferredFont` (Default: `"Outfit, Inter, sans-serif"`): Preferred font family for the RSVP reader.
+- `rsvpReader.fontSize` (Default: `28`): Default font size for the RSVP Viewer text in pixels.
+- `rsvpReader.preferredFont` (Default: `"Outfit, Inter, sans-serif"`): Preferred font family for the RSVP Viewer.
 
 ---
 

@@ -16,11 +16,11 @@
     "commands": [
       {
         "command": "rsvp-viewer.readActiveFile",
-        "title": "rsvp-viewer: Read Active File"
+        "title": "RSVP Viewer: Read Active File"
       },
       {
         "command": "rsvp-viewer.readSelection",
-        "title": "rsvp-viewer: Read Selection"
+        "title": "RSVP Viewer: Read Selection"
       }
     ],
     "menus": {
@@ -40,7 +40,7 @@
       "activitybar": [
         {
           "id": "rsvp-viewer-sidebar",
-          "title": "RSVP Reader",
+          "title": "RSVP Viewer",
           "icon": "media/icon.svg"
         }
       ]
@@ -55,7 +55,7 @@
       ]
     },
     "configuration": {
-      "title": "RSVP Reader",
+      "title": "RSVP Viewer",
       "properties": {
         "rsvpReader.defaultWpm": {
           "type": "integer",
@@ -70,12 +70,12 @@
         "rsvpReader.fontSize": {
           "type": "integer",
           "default": 28,
-          "description": "Font size for the RSVP reader text in pixels."
+          "description": "Font size for the RSVP Viewer text in pixels."
         },
         "rsvpReader.preferredFont": {
           "type": "string",
           "default": "Outfit, Inter, sans-serif",
-          "description": "Preferred font family for the RSVP reader."
+          "description": "Preferred font family for the RSVP Viewer."
         }
       }
     }

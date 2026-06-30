@@ -19,7 +19,7 @@ The VS Code extension SHALL register Command Palette commands and keyboard short
 The extension SHALL create and manage a VS Code Webview panel to display the RSVP player interface.
 - The Webview panel SHALL be opened in a custom Editor Tab or Sidebar panel based on user settings.
 - The extension and Webview SHALL exchange messages (e.g., loaded text stream, play/pause commands, current word state).
-- Only one RSVP reader panel instance SHALL be active at any given time (subsequent launches reuse or refresh the existing panel).
+- Only one RSVP Viewer panel instance SHALL be active at any given time (subsequent launches reuse or refresh the existing panel).
 
 #### Scenario: Reusing existing Webview panel
 - **WHEN** the user runs `rsvp-vscode.readSelection` while an RSVP Webview panel is already open

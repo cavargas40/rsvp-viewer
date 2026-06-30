@@ -9,6 +9,34 @@
 </head>
 <body>
   <div class="player-container">
+    <!-- Welcome/Intro Overlay -->
+    <div class="intro-container" id="introContainer">
+      <div class="intro-content">
+        <div class="intro-logo">
+          <svg viewBox="0 0 24 24" width="32" height="32">
+            <!-- Outer circle with a notch representing focus/ORP -->
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="44 12" />
+            <!-- Inner play button representing RSVP pacing -->
+            <polygon points="10,8 16,12 10,16" fill="currentColor" />
+            <!-- A central focus target point -->
+            <circle cx="12" cy="12" r="1" fill="currentColor" />
+          </svg>
+        </div>
+        <h2 class="intro-title">RSVP Viewer</h2>
+        <p class="intro-subtitle">Accelerate your reading speed</p>
+        <div class="intro-steps">
+          <div class="intro-step">
+            <span class="step-badge">1</span>
+            <span class="step-text">Select text in the editor</span>
+          </div>
+          <div class="intro-step">
+            <span class="step-badge">2</span>
+            <span class="step-text">Press <kbd id="cmdShortcut">Ctrl + Shift + P</kbd> and run <strong>RSVP: Read Selection</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Top Progress Bar -->
     <div class="progress-bar-container">
       <div class="progress-bar" id="progressBar"></div>

@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 
 describe("Extension Test Suite", () => {
   before(async () => {
-    vscode.window.showInformationMessage("Starting RSVP Reader Integration Tests...");
+    vscode.window.showInformationMessage("Starting RSVP Viewer Integration Tests...");
     const ext = vscode.extensions.getExtension("personal.rsvp-viewer");
     if (ext) {
       await ext.activate();
